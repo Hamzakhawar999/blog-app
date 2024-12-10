@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  await dbConnect(); // Ensure the database connection is established
+  await dbConnect(); 
   try {
     let { email, password } = await req.json();
 
@@ -45,4 +45,14 @@ export async function POST(req) {
       { status: 400 }
     );
   }
+}
+
+
+export function GET() {
+  return NextResponse.json(
+    {
+      message: "Login Page",
+    },
+    { status: 200 }
+  );
 }
