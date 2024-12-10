@@ -3,7 +3,25 @@ import user from "@/app/Models/user";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
+
+// Initialize CORS middleware
+const cors = Cors({
+  methods: ['GET', 'POST', 'OPTIONS'], // Allowed methods
+  origin: '*', // Replace with your front-end domain or use '*' for all origins
+});
+
+const runMiddleware = (req, res, fn) =>
+  new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
+
 export async function POST(req) {
+  await runMiddleware(req, req, cors);
   await dbConnect(); 
   try {
     let { email, password } = await req.json();
