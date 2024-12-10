@@ -2,7 +2,7 @@ import dbConnect from "@/app/Config/db";
 import user from "@/app/Models/user";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-
+import Cors from "cors";
 
 // Initialize CORS middleware
 const cors = Cors({
